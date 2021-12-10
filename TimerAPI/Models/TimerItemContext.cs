@@ -15,5 +15,6 @@ namespace TimerAPI.Models
         }
 
         public DbSet<TimerItem> TimerItems { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

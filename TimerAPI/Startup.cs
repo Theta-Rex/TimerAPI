@@ -29,6 +29,7 @@ namespace TimerAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITimerItemRepository, TimerItemRepository>();
             services.AddDbContext<TimerItemContext>(o => o.UseSqlite("Data source=TimerItems.db"));
             services.AddControllers();
@@ -48,7 +49,7 @@ namespace TimerAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TimerAPI v1"));
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
