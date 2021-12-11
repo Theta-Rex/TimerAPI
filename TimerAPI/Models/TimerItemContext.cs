@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TimerAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,14 @@ namespace TimerAPI.Models
 
         public DbSet<TimerItem> TimerItems { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Severity> Severitys { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TimerItem>().ToTable("TimerItems");
+            modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<Severity>().ToTable("Severitys");
+        }
+
     }
 }
