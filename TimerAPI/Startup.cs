@@ -8,14 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RepositoryLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TimerAPI.Models;
-using TimerAPI.Repositories;
+using RepositoryLibrary.Models;
+using RepositoryLibrary.Repositories;
 
-namespace TimerAPI
+namespace RepositoryLibrary
 {
     public class Startup
     {

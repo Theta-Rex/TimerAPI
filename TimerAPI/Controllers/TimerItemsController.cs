@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RepositoryLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TimerAPI.Models;
-using TimerAPI.Repositories;
+using RepositoryLibrary.Repositories;
+using RepositoryLibrary.Models;
 
 namespace TimerAPI.Controllers
 {

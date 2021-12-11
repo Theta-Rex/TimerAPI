@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TimerAPI.Models;
+using RepositoryLibrary.Models;
 
-namespace TimerAPI.Repositories
+namespace RepositoryLibrary.Repositories
 {
     public class TimerItemRepository : ITimerItemRepository
     {

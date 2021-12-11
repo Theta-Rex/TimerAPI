@@ -1,4 +1,4 @@
-﻿namespace TimerAPI.Models
+﻿namespace RepositoryLibrary.Models
 {
     using System;
     using System.Collections.Generic;

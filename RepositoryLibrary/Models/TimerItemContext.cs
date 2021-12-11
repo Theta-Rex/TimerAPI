@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TimerAPI.Models;
+using RepositoryLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TimerAPI.Models
+namespace RepositoryLibrary.Models
 {
     public class TimerItemContext : DbContext
     {
