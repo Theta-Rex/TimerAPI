@@ -1,50 +1,48 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ModelsLibary.Models;
-
-namespace RepositoryLibrary.Repositories
+﻿namespace RepositoryLibrary.Repositories
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    using ModelsLibary.Models;
+
     public class UserRepository : IUserRepository
     {
-        private readonly TimerItemContext _context;
+        private readonly TimerItemContext context;
 
         public UserRepository(TimerItemContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task<User> Create(User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            this.context.Users.Add(user);
+            await this.context.SaveChangesAsync();
 
             return user;
         }
 
         public async Task Delete(int id)
         {
-            var userToDelete = await _context.Users.FindAsync(id);
-            _context.Users.Remove(userToDelete);
-            await _context.SaveChangesAsync();
+            var userToDelete = await this.context.Users.FindAsync(id);
+            this.context.Users.Remove(userToDelete);
+            await this.context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<User>> Get()
         {
-            return await _context.Users.ToListAsync();
+            return await this.context.Users.ToListAsync();
         }
 
         public async Task<User> Get(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await this.context.Users.FindAsync(id);
         }
 
         public async Task Update(User user)
         {
-            _context.Entry(user).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            this.context.Entry(user).State = EntityState.Modified;
+            await this.context.SaveChangesAsync();
         }
     }
 }

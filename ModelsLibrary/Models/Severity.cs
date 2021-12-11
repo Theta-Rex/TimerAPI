@@ -1,15 +1,14 @@
-﻿namespace ModelsLibary.Models
+﻿// <copyright file="Severity.cs" company="Theta Rex, Inc.">
+//    Copyright © 2021 - Theta Rex, Inc.  All Rights Reserved.
+// </copyright>
+// <author>Joshua Kraskin</author>
 
+namespace ModelsLibary.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     public class Severity
     {
         public int Id { get; set; }
-        public string SeverityName{ get; set; }
 
+        public string SeverityName { get; set; }
     }
 }
