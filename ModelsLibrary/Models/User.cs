@@ -1,4 +1,4 @@
-﻿namespace RepositoryLibrary.Models
+﻿namespace ModelsLibary.Models
 {
     using System;
     using System.Collections.Generic;

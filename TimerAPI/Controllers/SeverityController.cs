@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using RepositoryLibrary.Models;
+using ModelsLibary.Models;
 using RepositoryLibrary.Repositories;
 
 namespace TimerAPI.Controllers

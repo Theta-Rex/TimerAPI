@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RepositoryLibrary.Repositories;
-using RepositoryLibrary.Models;
+using ModelsLibary.Models;
 
 namespace TimerAPI.Controllers
 {

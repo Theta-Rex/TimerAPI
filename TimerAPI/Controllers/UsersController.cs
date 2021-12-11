@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RepositoryLibrary.Models;
+using ModelsLibary.Models;
 using RepositoryLibrary.Repositories;
 
 namespace TimerAPI.Controllers
