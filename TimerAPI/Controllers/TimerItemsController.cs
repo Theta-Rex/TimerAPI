@@ -33,7 +33,14 @@ namespace TimerAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTimerItems()
         {
-            return this.Ok(await this.repository.GetTimerItems());
+            try
+            {
+                return this.Ok(await this.repository.GetTimerItems());
+            }
+            catch
+            {
+                return this.BadRequest();
+            }
         }
 
         /// <summary>
@@ -44,7 +51,14 @@ namespace TimerAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTimerItems(int id)
         {
-            return this.Ok(await this.repository.GetTimerItem(id));
+            try
+            {
+                return this.Ok(await this.repository.GetTimerItem(id));
+            }
+            catch
+            {
+                return this.NotFound();
+            }
         }
 
         /// <summary>
