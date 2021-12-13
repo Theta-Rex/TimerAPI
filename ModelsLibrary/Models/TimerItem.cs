@@ -1,5 +1,5 @@
-﻿// <copyright file="TimerItem.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="TimerItem.cs" company="Theta Rex, Inc.">
+//    Copyright © 2021 - Theta Rex, Inc.  All Rights Reserved.
 // </copyright>
 // <author>Joshua Kraskin</author>
 namespace ModelsLibary.Models

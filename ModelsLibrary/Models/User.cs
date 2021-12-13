@@ -1,7 +1,7 @@
-﻿// <copyright file="User.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="User.cs" company="Theta Rex, Inc.">
+//    Copyright © 2021 - Theta Rex, Inc.  All Rights Reserved.
 // </copyright>
-
+// <author>Joshua Kraskin</author>
 namespace ModelsLibary.Models
 {
     /// <summary>
