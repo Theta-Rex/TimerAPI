@@ -1,6 +1,7 @@
-﻿// <copyright file="TimerItemContext.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="TimerItemContext.cs" company="Theta Rex, Inc.">
+//    Copyright © 2021 - Theta Rex, Inc.  All Rights Reserved.
 // </copyright>
+// <author>Joshua Kraskin</author>
 namespace ModelsLibary.Models
 {
     using Microsoft.EntityFrameworkCore;

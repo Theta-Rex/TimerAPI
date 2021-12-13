@@ -4,12 +4,9 @@
 // <author>Joshua Kraskin</author>
 namespace TimerAPI.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using ModelsLibary.Models;
-    using RepositoryLibrary.Repositories;
 
     /// <summary>
     /// SeverityController class.
@@ -18,15 +15,15 @@ namespace TimerAPI.Controllers
     [ApiController]
     public class SeverityController : ControllerBase
     {
-        private readonly ISeverityRepository severityRepository;
+        private readonly IRepository repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SeverityController"/> class.
         /// </summary>
-        /// <param name="severityRepository">Passes severityrepository interface.</param>
-        public SeverityController(ISeverityRepository severityRepository)
+        /// <param name="repository">Passes severityrepository interface.</param>
+        public SeverityController(IRepository repository)
         {
-            this.severityRepository = severityRepository;
+            this.repository = repository;
         }
 
         /// <summary>
@@ -34,9 +31,9 @@ namespace TimerAPI.Controllers
         /// </summary>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpGet]
-        public async Task<IEnumerable<Severity>> GetSeveritys()
+        public async Task<IActionResult> GetSeverities()
         {
-            return await this.severityRepository.Get();
+            return this.Ok(await this.repository.GetSeverities());
         }
 
         /// <summary>
@@ -46,9 +43,9 @@ namespace TimerAPI.Controllers
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpGet("{id}")]
 
-        public async Task<ActionResult<Severity>> GetSeveritys(int id)
+        public async Task<IActionResult> GetSeveritys(int id)
         {
-            return await this.severityRepository.Get(id);
+            return this.Ok(await this.repository.GetSeverity(id));
         }
 
         /// <summary>
@@ -57,12 +54,9 @@ namespace TimerAPI.Controllers
         /// <param name="severity">Object to create.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpPost]
-        public async Task<ActionResult<Severity>> PostUsers([FromBody] Severity severity)
+        public async Task<IActionResult> PostSeverity([FromBody] Severity severity)
         {
-            var newSeverity = await this.severityRepository.Create(severity);
-            return this.StatusCode(201);
-
-            // return CreatedAtAction(nameof(GetSeveritys), new { severityId = newSeverity.Id }, newSeverity);
+            return this.Ok(await this.repository.CreateSeverity(severity));
         }
 
         /// <summary>
@@ -72,15 +66,9 @@ namespace TimerAPI.Controllers
         /// <param name="severity">Object.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [HttpPut]
-        public async Task<ActionResult> PutUsers(int id, [FromBody] Severity severity)
+        public async Task<IActionResult> PutUsers(int id, [FromBody] Severity severity)
         {
-            if (id != severity.Id)
-            {
-                return this.BadRequest();
-            }
-
-            await this.severityRepository.Update(severity);
-            return this.NoContent();
+            return this.Ok(await this.repository.UpdateSeverity(severity));
         }
 
         /// <summary>
@@ -89,16 +77,15 @@ namespace TimerAPI.Controllers
         /// <param name="id">Id for specific item.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteSeverity(int id)
         {
-            var severityToDelete = await this.severityRepository.Get(id);
-            if (severityToDelete == null)
+            var severity = await this.repository.GetSeverity(id);
+            if (severity == null)
             {
                 return this.NotFound();
             }
 
-            await this.severityRepository.Delete(severityToDelete.Id);
-            return this.NoContent();
+            return this.Ok(await this.repository.DeleteSeverity(severity.Id));
         }
     }
 }

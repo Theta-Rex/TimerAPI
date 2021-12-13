@@ -4,11 +4,9 @@
 // <author>Joshua Kraskin</author>
 namespace TimerAPI.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using ModelsLibary.Models;
-    using RepositoryLibrary.Repositories;
 
     /// <summary>
     /// TimerItemsController class.
@@ -17,15 +15,15 @@ namespace TimerAPI.Controllers
     [ApiController]
     public class TimerItemsController : ControllerBase
     {
-        private readonly ITimerItemRepository timerItemRepository;
+        private readonly IRepository repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TimerItemsController"/> class.
         /// </summary>
-        /// <param name="timerItemRepository">Passes timerItemRepository Inteface.</param>
-        public TimerItemsController(ITimerItemRepository timerItemRepository)
+        /// <param name="repository">Passes timerItemRepository Inteface.</param>
+        public TimerItemsController(IRepository repository)
         {
-            this.timerItemRepository = timerItemRepository;
+            this.repository = repository;
         }
 
         /// <summary>
@@ -33,9 +31,9 @@ namespace TimerAPI.Controllers
         /// </summary>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpGet]
-        public async Task<IEnumerable<TimerItem>> GetTimerItems()
+        public async Task<IActionResult> GetTimerItems()
         {
-            return await this.timerItemRepository.Get();
+            return this.Ok(await this.repository.GetTimerItems());
         }
 
         /// <summary>
@@ -44,9 +42,9 @@ namespace TimerAPI.Controllers
         /// <param name="id">Id for specific item.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<TimerItem>> GetTimerItems(int id)
+        public async Task<IActionResult> GetTimerItems(int id)
         {
-            return await this.timerItemRepository.Get(id);
+            return this.Ok(await this.repository.GetTimerItem(id));
         }
 
         /// <summary>
@@ -55,12 +53,9 @@ namespace TimerAPI.Controllers
         /// <param name="timerItem">Object to create.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpPost]
-        public async Task<ActionResult<TimerItem>> PostTimerItems([FromBody] TimerItem timerItem)
+        public async Task<IActionResult> PostTimerItems([FromBody] TimerItem timerItem)
         {
-            var newTimerItem = await this.timerItemRepository.Create(timerItem);
-            return this.StatusCode(201);
-
-            // return CreatedAtAction(nameof(GetTimerItems), new { timerId = newTimerItem.Id }, newTimerItem);
+            return this.Ok(await this.repository.CreateTimerItem(timerItem));
         }
 
         /// <summary>
@@ -70,15 +65,14 @@ namespace TimerAPI.Controllers
         /// <param name="timerItem">Object.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [HttpPut]
-        public async Task<ActionResult> PutTimerItems(int id, [FromBody] TimerItem timerItem)
+        public async Task<IActionResult> PutTimerItems(int id, [FromBody] TimerItem timerItem)
         {
             if (id != timerItem.Id)
             {
                 return this.BadRequest();
             }
 
-            await this.timerItemRepository.Update(timerItem);
-            return this.NoContent();
+            return this.Ok(await this.repository.UpdateTimerItem(timerItem));
         }
 
         /// <summary>
@@ -87,16 +81,15 @@ namespace TimerAPI.Controllers
         /// <param name="id">Id for specific item.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var timerItemToDelete = await this.timerItemRepository.Get(id);
-            if (timerItemToDelete == null)
+            var timerItem = await this.repository.GetTimerItem(id);
+            if (timerItem == null)
             {
                 return this.NotFound();
             }
 
-            await this.timerItemRepository.Delete(timerItemToDelete.Id);
-            return this.NoContent();
+            return this.Ok(await this.repository.DeleteTimerItem(timerItem.Id));
         }
     }
 }

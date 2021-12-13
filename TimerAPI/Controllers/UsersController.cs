@@ -4,11 +4,9 @@
 // <author>Joshua Kraskin</author>
 namespace TimerAPI.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using ModelsLibary.Models;
-    using RepositoryLibrary.Repositories;
 
     /// <summary>
     /// TimerItemsController class.
@@ -17,15 +15,15 @@ namespace TimerAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository userRepository;
+        private readonly IRepository repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersController"/> class.
         /// </summary>
-        /// <param name="userRepository">Passes userRepository Interface.</param>
-        public UsersController(IUserRepository userRepository)
+        /// <param name="repository">Passes userRepository Interface.</param>
+        public UsersController(IRepository repository)
         {
-            this.userRepository = userRepository;
+            this.repository = repository;
         }
 
         /// <summary>
@@ -33,9 +31,9 @@ namespace TimerAPI.Controllers
         /// </summary>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpGet]
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IActionResult> GetUsers()
         {
-            return await this.userRepository.Get();
+            return this.Ok(await this.repository.GetUsers());
         }
 
         /// <summary>
@@ -44,9 +42,9 @@ namespace TimerAPI.Controllers
         /// <param name="id">Id for specific item.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUsers(int id)
+        public async Task<IActionResult> GetUsers(int id)
         {
-            return await this.userRepository.Get(id);
+            return this.Ok(await this.repository.GetUser(id));
         }
 
         /// <summary>
@@ -55,12 +53,9 @@ namespace TimerAPI.Controllers
         /// <param name="user">Object to create.</param>
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpPost]
-        public async Task<ActionResult<User>> PostUsers([FromBody] User user)
+        public async Task<IActionResult> PostUsers([FromBody] User user)
         {
-            var newUser = await this.userRepository.Create(user);
-            return this.StatusCode(201);
-
-            // return this.CreatedAtAction(nameof(GetUsers), new { userId = newUser.Id }, newUser);
+            return this.Ok(await this.repository.CreateUser(user));
         }
 
         /// <summary>
@@ -70,15 +65,9 @@ namespace TimerAPI.Controllers
         /// <param name="user">Object.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [HttpPut]
-        public async Task<ActionResult> PutUsers(int id, [FromBody] User user)
+        public async Task<IActionResult> PutUsers(int id, [FromBody] User user)
         {
-            if (id != user.Id)
-            {
-                return this.BadRequest();
-            }
-
-            await this.userRepository.Update(user);
-            return this.NoContent();
+            return this.Ok(await this.repository.UpdateUser(user));
         }
 
         /// <summary>
@@ -87,16 +76,15 @@ namespace TimerAPI.Controllers
         /// <param name="id">Id for specific item.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var userToDelete = await this.userRepository.Get(id);
-            if (userToDelete == null)
+            var user = await this.repository.GetUser(id);
+            if (user == null)
             {
                 return this.NotFound();
             }
 
-            await this.userRepository.Delete(userToDelete.Id);
-            return this.NoContent();
+            return this.Ok(await this.repository.DeleteUser(user.Id));
         }
     }
 }

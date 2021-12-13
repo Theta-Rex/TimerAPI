@@ -2,7 +2,6 @@
 //    Copyright © 2021 - Theta Rex, Inc.  All Rights Reserved.
 // </copyright>
 // <author>Joshua Kraskin</author>
-
 namespace ModelsLibary.Models
 {
     /// <summary>
@@ -11,13 +10,13 @@ namespace ModelsLibary.Models
     public class Severity
     {
         /// <summary>
-        /// Gets or sets Id.
+        /// Gets or sets the unique identifier.
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets SeverityName.
+        /// Gets or sets the name.
         /// </summary>
-        public string SeverityName { get; set; }
+        public string Name { get; set; }
     }
 }

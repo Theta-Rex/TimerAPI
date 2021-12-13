@@ -1,7 +1,7 @@
-﻿// <copyright file="User.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="User.cs" company="Theta Rex, Inc.">
+//    Copyright © 2021 - Theta Rex, Inc.  All Rights Reserved.
 // </copyright>
-
+// <author>Joshua Kraskin</author>
 namespace ModelsLibary.Models
 {
     /// <summary>
@@ -10,14 +10,14 @@ namespace ModelsLibary.Models
     public class User
     {
         /// <summary>
-        /// Gets or sets Id.
+        /// Gets or sets unique identifier.
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets UserName.
+        /// Gets or sets the user's name.
         /// </summary>
-        public string UserName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets FirstName.
