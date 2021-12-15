@@ -78,7 +78,7 @@ namespace TimerAPI.Controllers
         /// <param name="id">Item to update.</param>
         /// <param name="timerItem">Object.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutTimerItems(int id, [FromBody] TimerItem timerItem)
         {
             if (id != timerItem.Id)

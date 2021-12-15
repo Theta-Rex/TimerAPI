@@ -64,7 +64,7 @@ namespace TimerAPI.Controllers
         /// <param name="id">Item to update.</param>
         /// <param name="user">Object.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutUsers(int id, [FromBody] User user)
         {
             return this.Ok(await this.repository.UpdateUser(user));
