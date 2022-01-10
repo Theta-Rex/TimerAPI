@@ -15,14 +15,18 @@ namespace TimerAPI.Controllers
     [ApiController]
     public class SeverityController : ControllerBase
     {
+        /// <summary>
+        /// The repository for persistent data.
+        /// </summary>
         private readonly IRepository repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SeverityController"/> class.
         /// </summary>
-        /// <param name="repository">Passes severityrepository interface.</param>
+        /// <param name="repository">The repository.</param>
         public SeverityController(IRepository repository)
         {
+            // Initialize the object.
             this.repository = repository;
         }
 

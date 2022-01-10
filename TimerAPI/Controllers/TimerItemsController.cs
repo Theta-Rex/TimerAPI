@@ -4,6 +4,7 @@
 // <author>Joshua Kraskin</author>
 namespace TimerAPI.Controllers
 {
+    using System.Net.Http;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using ModelsLibary.Models;
@@ -15,6 +16,9 @@ namespace TimerAPI.Controllers
     [ApiController]
     public class TimerItemsController : ControllerBase
     {
+        /// <summary>
+        /// The repository for persistent data.
+        /// </summary>
         private readonly IRepository repository;
 
         /// <summary>
@@ -23,6 +27,7 @@ namespace TimerAPI.Controllers
         /// <param name="repository">Passes timerItemRepository Inteface.</param>
         public TimerItemsController(IRepository repository)
         {
+            // Initialize the object.
             this.repository = repository;
         }
 
@@ -37,7 +42,7 @@ namespace TimerAPI.Controllers
             {
                 return this.Ok(await this.repository.GetTimerItems());
             }
-            catch
+            catch (HttpRequestException)
             {
                 return this.BadRequest();
             }

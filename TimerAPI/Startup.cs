@@ -32,12 +32,11 @@ namespace RepositoryLibrary
         /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-
         /// <summary>
         /// Calls ConfigureServices.
         /// </summary>
         /// <param name="services">IServiceCollection.</param>
+        /// <remarks>This method gets called by the runtime. Use this method to add services to the container.</remarks>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRepository, Repository>();
@@ -45,13 +44,12 @@ namespace RepositoryLibrary
             services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-
         /// <summary>
         /// Calls Configure.
         /// </summary>
         /// <param name="app">IApplicationBuilder.</param>
         /// <param name="env">IWebHostEnvironment.</param>
+        /// <remarks>This method gets called by the runtime. Use this method to configure the HTTP request pipeline.</remarks>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
